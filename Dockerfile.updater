@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libopenblas-dev \
+    cron \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY app/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем скрипт обновления
+COPY task6/update_index.py /app/update_index.py
+
+# Создаём папки для логов и состояния
+RUN mkdir -p /app/logs /app/state
+
+# Настраиваем cron (каждую минуту для теста, потом заменить на "0 6 * * *")
+# Используем python3 вместо python
+RUN echo "0 6 * * * cd /app && /usr/local/bin/python3 /app/update_index.py >> /app/logs/update.log 2>&1" > /etc/cron.d/update-cron \
+    && chmod 0644 /etc/cron.d/update-cron \
+    && crontab /etc/cron.d/update-cron
+
+CMD ["cron", "-f"]

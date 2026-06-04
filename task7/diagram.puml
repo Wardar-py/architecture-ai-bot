@@ -1,0 +1,30 @@
+@startuml
+actor Пользователь as User
+participant "RAG-бот" as Bot
+participant "Векторная БД\n(ChromaDB)" as DB
+participant "LLM\n(Ollama)" as LLM
+participant "Логирование\n(logs.jsonl)" as Log
+participant "Тестировщик\n(evaluate.py)" as Tester
+
+== Обработка запроса ==
+User -> Bot: запрос
+Bot -> DB: similarity_search(запрос)
+alt чанки найдены
+    DB --> Bot: список чанков
+    Bot -> Bot: фильтрация вредоносных чанков
+    Bot -> LLM: промпт + контекст
+    LLM --> Bot: сгенерированный ответ
+    Bot -> Log: запись (успех, источники)
+    Bot --> User: ответ
+else чанки не найдены
+    DB --> Bot: пустой список
+    Bot -> Log: запись (not_found)
+    Bot --> User: "Я не знаю"
+end
+
+== Автоматическое тестирование ==
+Tester -> Bot: вопрос из golden_set
+
+Tester -> Log: запись результата
+Tester -> Tester: сравнение с expected
+@enduml

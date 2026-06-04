@@ -1,0 +1,14 @@
+[
+  {"question": "Кто такой Ryon Vex?", "expected": "success"},
+  {"question": "Опиши планету Varkos", "expected": "success"},
+  {"question": "Что такое Flux Blade?", "expected": "success"},
+  {"question": "Где находится Nimbus Station?", "expected": "success"},
+  {"question": "Кто такой Kith?", "expected": "success"},
+  {"question": "Что такое Void Core?", "expected": "not_found"},
+  {"question": "Расскажи о Xarn Velgor", "expected": "not_found"},
+  {"question": "Как работает Synth Flux?", "expected": "not_found"},
+  {"question": "Назови столицу Thalor Prime", "expected": "success"},
+  {"question": "Кто такой Lord Nexar?", "expected": "success"},
+  {"question": "Что такое Void Shifter?", "expected": "success"},
+  {"question": "Какие расы населяют Lunara?", "expected": "success"}
+]

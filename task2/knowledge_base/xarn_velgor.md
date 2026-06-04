@@ -1,0 +1,3 @@
+# Xarn Velgor
+
+Xarn Velgor, ранее известный как Zalek Tarn, был могущественным Void Warden'ом, правой рукой Lord Nexar'а. Облачённый в чёрную броню и использующий красный Flux Blade, он внушал страх по всей галактике. В прошлом он был Aether Knight'ом, но под влиянием Lord Nexar'а обратился к тёмной стороне Synth Flux. Его главная цель – найти и уничтожить Free Worlds Coalition и своего сына, Ryon Vex'а.

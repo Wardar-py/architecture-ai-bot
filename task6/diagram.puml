@@ -1,0 +1,21 @@
+@startuml
+title RAG Auto-Update
+
+actor "Сотрудник" as User
+entity "docs/" as Source
+component "Cron (ежедневно 6:00)" as Scheduler
+component "update_index.py" as Updater
+database "ChromaDB\n(chroma_index/)" as Chroma
+file "Логи\n(update.log)" as Log
+component "RAG‑бот" as Bot
+
+User --> Source : добавляет .md файлы
+Scheduler --> Updater : запускает
+Updater --> Source : сканирует новые/изменённые файлы
+Updater --> Updater : разбивает на чанки
+Updater --> Updater : векторизует (MiniLM)
+Updater --> Chroma : добавляет чанки
+Updater --> Log : записывает результаты
+Bot --> Chroma : поиск по индексу
+Bot --> User : ответ
+@enduml
